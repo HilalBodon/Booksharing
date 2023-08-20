@@ -1,0 +1,38 @@
+.card {
+    display:flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 45%;
+  }
+  .card:hover{
+    background-color: rgba(15, 151, 214, 0.372);
+  }
+  
+  .title {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  .author {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .review {
+    font-size: 1rem;
+    color: #333;
+  }
+  img {
+    height: 170px;
+    width: 150px;
+    border-radius: 15px;
+  }

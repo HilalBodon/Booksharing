@@ -41,7 +41,6 @@ const BookDiscovery = () => {
             <h3>{book.name}</h3>
             <p>Author: {book.author}</p>
             <p>Review: {book.review}</p>
-            {/* Display other book information */}
           </div>
         ))}
       </div>
