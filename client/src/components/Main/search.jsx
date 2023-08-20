@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const BookDiscovery = () => {
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState([]);
+  const [authToken, setAuthToken] = useState(""); 
+
+  useEffect(() => {
+    const storedAuthToken = localStorage.getItem("token");
+    setAuthToken(storedAuthToken);
+  }, []); 
 
   const handleSearch = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/books/discover", {
         params: { keywords: query },
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
       });
       setBooks(response.data);
     } catch (error) {
@@ -41,3 +50,4 @@ const BookDiscovery = () => {
 };
 
 export default BookDiscovery;
+
