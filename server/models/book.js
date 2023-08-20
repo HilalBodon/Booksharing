@@ -6,7 +6,7 @@ const bookSchema = new mongoose.Schema({
   genre: { type: String, required: true},
   picture: String,
   review:  String ,
-  likes: { type: Number, default: 0 },
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
 
 });

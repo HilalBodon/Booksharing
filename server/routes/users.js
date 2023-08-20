@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { User, validate } = require("../models/user");
 const bcrypt = require("bcrypt");
-
+const authMiddleware = require('../middlewares/auth.middleware');
 router.post("/", async (req, res) => {
 	try {
 		const { error } = validate(req.body);
@@ -23,5 +23,38 @@ router.post("/", async (req, res) => {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
 });
+
+// _____________________________________________________________________________
+
+router.post('/follow/:userId', authMiddleware, async (req, res) => {
+	try {
+	  const loggedInUserId = req.user._id;
+	  const userToFollowId = req.params.userId;
+  
+	  await User.findByIdAndUpdate(loggedInUserId, { $addToSet: { following: userToFollowId } });
+	  await User.findByIdAndUpdate(userToFollowId, { $addToSet: { followers: loggedInUserId } });
+  
+	  res.status(200).send({ message: 'Successfully followed user.' });
+	} catch (error) {
+	  console.error(error);
+	  res.status(500).send({ message: 'Internal Server Error' });
+	}
+  });
+  
+  router.post('/unfollow/:userId', authMiddleware, async (req, res) => {
+	try {
+	  const loggedInUserId = req.user._id;
+	  const userToUnfollowId = req.params.userId;
+  
+	  await User.findByIdAndUpdate(loggedInUserId, { $pull: { following: userToUnfollowId } });
+	  await User.findByIdAndUpdate(userToUnfollowId, { $pull: { followers: loggedInUserId } });
+  
+	  res.status(200).send({ message: 'Successfully unfollowed user.' });
+	} catch (error) {
+	  console.error(error);
+	  res.status(500).send({ message: 'Internal Server Error' });
+	}
+  });
+  
 
 module.exports = router;

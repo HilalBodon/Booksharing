@@ -9,10 +9,10 @@ mongoose.model('User', User.schema);
 // ___________________________________________________
 router.post('/',authMiddleware, async (req, res) => {
     try {
-      const { name, author, picture, review } = req.body;
+      const { name, author,genre, picture, review } = req.body;
       const userId = req.user._id;
       const user = await User.findById(userId);
-      const newBook = new Book({user: user, name, author, picture, review, });
+      const newBook = new Book({user: user, name, author,genre, picture, review,likes: 0 });
       await newBook.save();
       res.status(201).send(newBook);
     } catch (error) {
@@ -73,4 +73,31 @@ router.get('/discover',authMiddleware, async (req, res) => {
     }
   });
 // ____________________________________________________________________
+
+router.post('/like/:bookId', authMiddleware, async (req, res) => {
+    try {
+        const loggedInUserId = req.user._id;
+        const bookIdToLike = req.params.bookId;
+        
+        const loggedInUser = await User.findById(loggedInUserId);
+        const bookToLike = await Book.findById(bookIdToLike);
+
+        if (!bookToLike) {
+            return res.status(404).send({ message: "Book not found" });
+        }
+
+        if (bookToLike.likes === loggedInUserId) {
+            return res.status(400).send({ message: "You've already liked this book" });
+        }
+
+        bookToLike.likes = loggedInUserId;
+        await bookToLike.save();
+
+        res.status(200).send({ message: "Book liked successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+});
+
 module.exports = router;
