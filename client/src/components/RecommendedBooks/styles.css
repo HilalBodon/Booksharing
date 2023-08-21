@@ -1,0 +1,8 @@
+.books_container{
+    margin: 20px 0px 20px 0px;
+     display: flex;
+     align-items: center;
+     flex-direction: row;
+     flex-wrap: wrap;
+     background-color: rgba(174, 174, 174, 0.557);
+ }
