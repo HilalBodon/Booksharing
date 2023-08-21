@@ -1,7 +1,7 @@
 .card {
     display:flex;
     flex-direction: row;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     border: 1px solid #ddd;
@@ -10,8 +10,13 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    width: 45%;
+    width: 30%;
   }
+.incard{
+ width: 50%;
+ height: min-content;
+}
+
   .card:hover{
     background-color: rgba(15, 151, 214, 0.372);
   }
@@ -30,9 +35,38 @@
   .review {
     font-size: 1rem;
     color: #333;
+    height: 80px;
+    overflow: hidden;
+  }
+  
+  .review.scrollable {
+    overflow-y: scroll;
   }
   img {
     height: 170px;
     width: 150px;
     border-radius: 15px;
   }
+
+  .followButton,.likeButton {
+      color: #3399FF;
+      font-family: "Helvetica";
+      font-size: 10pt;
+      background-color: #ffffff;
+      border: 1px solid;
+      border-color: #3399FF;
+      border-radius: 3px;
+      width: 85px;
+      height: 30px;
+      top: 50px;
+      left: 50px;	
+      cursor: hand;		    
+    
+  }
+   .btns{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 7px;
+   }
+

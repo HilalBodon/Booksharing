@@ -90,7 +90,7 @@ router.post('/like/:bookId', authMiddleware, async (req, res) => {
             return res.status(400).send({ message: "You've already liked this book" });
         }
 
-        bookToLike.likes = loggedInUserId;
+        bookToLike.likes = loggedInUser;
         await bookToLike.save();
 
         res.status(200).send({ message: "Book liked successfully" });

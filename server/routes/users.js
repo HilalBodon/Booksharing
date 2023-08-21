@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { User, validate } = require("../models/user");
 const bcrypt = require("bcrypt");
 const authMiddleware = require('../middlewares/auth.middleware');
+
 router.post("/", async (req, res) => {
 	try {
 		const { error } = validate(req.body);
@@ -55,6 +56,22 @@ router.post('/follow/:userId', authMiddleware, async (req, res) => {
 	  res.status(500).send({ message: 'Internal Server Error' });
 	}
   });
+
+//   router.get('/status/:userId/:bookId', authMiddleware, async (req, res) => {
+// 	try {
+// 	  const loggedInUserId = req.user._id;
+// 	  const bookId = req.params.bookId;
+  
+// 	  const user = await User.findById(loggedInUserId);
+// 	  const isLiked = user.likes.includes(bookId);
+// 	  const isFollowing = user.following.includes(bookId);
+  
+// 	  res.status(200).json({ isLiked, isFollowing });
+// 	} catch (error) {
+// 	  console.error(error);
+// 	  res.status(500).send({ message: "Internal Server Error" });
+// 	}
+//   });
   
 
 module.exports = router;
