@@ -90,7 +90,7 @@ router.post('/like/:bookId', authMiddleware, async (req, res) => {
             return res.status(400).send({ message: "You've already liked this book" });
         }
 
-        bookToLike.likes = loggedInUser;
+        bookToLike.likes.push(loggedInUserId);
         await bookToLike.save();
 
         res.status(200).send({ message: "Book liked successfully" });
@@ -119,8 +119,9 @@ router.post('/remove-like/:bookId', authMiddleware, async (req, res) => {
             return res.status(400).send({ message: "User has not liked the book" });
         }
 
-        const updatedLikes = bookToUpdate.likes.filter(like => like.toString() !== userId);
-
+        const updatedLikes = bookToUpdate.likes.filter(like => like.toString() !== userId.toString()
+          );
+          
         await Book.findByIdAndUpdate(bookId, {
             likes: updatedLikes,
             likesCount: updatedLikes.length

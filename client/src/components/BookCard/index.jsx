@@ -5,8 +5,27 @@ import axios from "axios";
 const BookCard = ({ authToken, book,userId }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [creatorName, setCreatorName] = useState("");
 
+  useEffect(() => {
+    const fetchCreatorName = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/users/${book.user}`,
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+        setCreatorName(response.data.name);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
+    fetchCreatorName();
+  }, [authToken, book.user]);
 
   
   // useEffect(() => {
@@ -46,6 +65,7 @@ const BookCard = ({ authToken, book,userId }) => {
       );
 
       setIsLiked(true);
+      book.likes.push(userId);
       console.log("Liked!");
     } catch (error) {
       console.error(error);
@@ -65,6 +85,7 @@ const BookCard = ({ authToken, book,userId }) => {
       }
     );
       setIsLiked(false);
+      book.likes = book.likes.filter((likeId) => likeId !== userId); 
       console.log("Unliked!");
     } catch (error) {
       console.error(error);
@@ -127,17 +148,23 @@ const BookCard = ({ authToken, book,userId }) => {
       <div className={styles.img}>
           <img src={book.picture} alt="BOOK" />
         </div>
-      <div className={styles.btns}>
+
+        <div className={styles.btns}>
+        <p>Created By: {creatorName}</p>
+        </div>
+
+       <div className={styles.btns}>
         {isFollowing ? (
           <button className={styles.followButton} onClick={handleUnfollow}>- Unfollow</button>
         ) : (
           <button className={styles.followButton} onClick={handleFollow}>+ Follow</button>
         )}
         {isLiked ? (
-          <button className={styles.likeButton} onClick={handleUnlike}>Unlike</button>
+          <button className={styles.likeButton} onClick={handleUnlike}>Unlike {book.likes.length}</button>
         ) : (
-          <button className={styles.likeButton} onClick={handleLike}>Like</button>
+          <button className={styles.likeButton} onClick={handleLike}>Likes {book.likes.length}</button>
         )}
+
       </div>
     </div>
   );

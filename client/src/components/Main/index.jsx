@@ -9,9 +9,10 @@ import styles from "./styles.module.css";
 
 const Main = ({ authToken }) => {
   const [userId, setUserId] = useState(null);
-  const [showAddBookForm, setShowAddBookForm] = useState(false);
+  const [showAddBookForm, setShowAddBookForm] = useState(true);
   const [books, setBooks] = useState([]);
   const [showRecommended, setShowRecommended] = useState(false);
+  const [showBookDiscovery, setShowBookDiscovery] = useState(true);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -48,13 +49,17 @@ const Main = ({ authToken }) => {
         <h1>ShareBook</h1>
         <button
           className={styles.btn}
-          onClick={() => setShowAddBookForm(!showAddBookForm)}
+          onClick={() => {
+            setShowAddBookForm(!showAddBookForm);
+          }}
         >
           + Add New Book
         </button>
         <button
           className={styles.btn}
-          onClick={() => setShowRecommended(!showRecommended)}
+          onClick={() => {
+            setShowRecommended(!showRecommended);
+          }}
         >
           {showRecommended ? "All Books" : "Recommended Books"}
         </button>
@@ -63,9 +68,21 @@ const Main = ({ authToken }) => {
         </button>
       </nav>
 
-      <div className={styles.search_add}>
-        <BookDiscovery authToken={authToken} />
-      </div>
+
+{showBookDiscovery && (
+        <div className={styles.search_add}>
+          <BookDiscovery authToken={authToken}/>
+		  
+        </div>
+      )}
+	  
+      {!showAddBookForm && (
+				<AddBookForm
+		authToken={authToken}
+		onBookAdded={handleBookAdded}
+		setShowAddBookForm={setShowAddBookForm}
+		/>
+      )}
 
       <div className={styles.books_container}>
         {showRecommended ? (
@@ -82,16 +99,11 @@ const Main = ({ authToken }) => {
         )}
       </div>
 
-      {!showAddBookForm && (
-        <AddBookForm
-          authToken={authToken}
-          onBookAdded={handleBookAdded}
-          setShowAddBookForm={setShowAddBookForm}
-        />
-      )}
+
     </div>
   );
 };
 
 export default Main;
+
 

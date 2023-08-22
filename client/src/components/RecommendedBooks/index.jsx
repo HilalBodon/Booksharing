@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BookCard from "../BookCard";
+import styles from "./styles.css";
 
 const RecommendedBooks = ({ authToken }) => {
   const [recommendedBooks, setRecommendedBooks] = useState([]);

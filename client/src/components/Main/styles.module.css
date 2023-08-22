@@ -26,8 +26,8 @@
 	margin-right: 20px;
 }
 .white_btn:hover{
-	background-color:#212121;
-	transition: 0.7s;
+	background-color:#840707;
+	transition: 0.3s;
 	color: aliceblue;
 }
 
@@ -38,7 +38,6 @@
 	align-items: center;
 	flex-direction: row;
 	flex-wrap: wrap;
-	background-color: rgba(238, 238, 238, 0.557);
 }
 
 .btn{
@@ -48,15 +47,15 @@
 	background-color: cadetblue;
 	color: aliceblue;
 	border-radius: 20px;
-	width: 120px;
 	font-weight: bold;
 	font-size: 14px;
+	padding: 10px;
 	cursor: pointer;
 	margin-right: 8px;
 }
 .btn:hover{
-    background-color:#6e3911;
-    transition: 0.7s;
+    background-color:#9f6e48;
+    transition: 0.3s;
  }
 
 .search_add{

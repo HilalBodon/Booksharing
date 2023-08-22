@@ -40,15 +40,8 @@ const AddBookForm = ({ authToken, onBookAdded, setShowAddBookForm }) => {
     }
   };
 
-  const handlePictureChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setFormData({ ...formData, picture: e.target.result });
-      };
-      reader.readAsDataURL(file);
-    }
+  const handlePictureChange = (url) => {
+    setFormData({ ...formData, picture: url });
   };
 
   return (
@@ -80,10 +73,12 @@ const AddBookForm = ({ authToken, onBookAdded, setShowAddBookForm }) => {
           }
         />
         <input
-          type="file"
-          accept="image/*"
-          onChange={handlePictureChange}
+        type="text"
+        placeholder="Image URL"
+        value={formData.picture}
+        onChange={(e) => handlePictureChange(e.target.value)}
         />
+
         <textarea
           placeholder="Review"
           value={formData.review}
