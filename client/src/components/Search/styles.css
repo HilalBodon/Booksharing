@@ -6,8 +6,9 @@
     font-size: 18px;
 }
 .books_container{
-   margin: 20px 0px 20px 0px;
-	display: flex;
+   margin: 0px;
+   padding: 0px;
+   display: flex;
 	align-items: center;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -37,5 +38,5 @@
  }
  .main-search{
    background-color: rgb(240, 240, 240);
-   padding: 10px;
+   padding-bottom: 15px;
  }
