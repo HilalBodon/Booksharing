@@ -54,7 +54,7 @@
 
 
 
-  .followButton,.likeButton {
+  .followButton {
       color: #3399FF;
       font-family: "Helvetica";
       font-size: 10pt;
@@ -67,8 +67,19 @@
       top: 50px;
       left: 50px;	
       cursor: hand;		    
-    
   }
+
+.likeButton{
+  background-color: #ffffff;
+  border: 0px;
+  font-size: larger;
+}
+.likeButton:hover{
+  zoom: 120%;
+  background-color: transparent;
+}
+
+
    .btns{
     width: 70%;
     display: flex;
