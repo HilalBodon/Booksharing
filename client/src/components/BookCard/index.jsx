@@ -150,7 +150,7 @@ const BookCard = ({ authToken, book,userId }) => {
         </div>
 
         <div className={styles.btns}>
-        <p>Created By: {creatorName}</p>
+        <p  className={styles.author}>Created By: {creatorName}</p>
         </div>
 
        <div className={styles.btns}>
@@ -160,9 +160,9 @@ const BookCard = ({ authToken, book,userId }) => {
           <button className={styles.followButton} onClick={handleFollow}>+ Follow</button>
         )}
         {isLiked ? (
-          <button className={styles.likeButton} onClick={handleUnlike}>Unlike {book.likes.length}</button>
+          <button className={styles.likeButton} onClick={handleUnlike}>🤍 {book.likes.length}</button>
         ) : (
-          <button className={styles.likeButton} onClick={handleLike}>Likes {book.likes.length}</button>
+          <button className={styles.likeButton} onClick={handleLike}>❤️ {book.likes.length}</button>
         )}
 
       </div>
