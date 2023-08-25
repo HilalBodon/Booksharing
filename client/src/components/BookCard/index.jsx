@@ -159,11 +159,13 @@ const BookCard = ({ authToken, book,userId }) => {
         ) : (
           <button className={styles.followButton} onClick={handleFollow}>+ Follow</button>
         )}
-        {isLiked ? (
-          <button className={styles.likeButton} onClick={handleUnlike}>🤍 {book.likes.length}</button>
-        ) : (
-          <button className={styles.likeButton} onClick={handleLike}>❤️ {book.likes.length}</button>
-        )}
+  <button
+    className={`${styles.likeButton} ${isLiked ? styles.liked : ''}`}
+    onClick={isLiked ? handleUnlike : handleLike}
+  >
+    <span role="img" aria-label="Like">{isLiked ? '❤️' : '🤍'} </span>
+    {book.likes.length}
+  </button>
 
       </div>
     </div>
